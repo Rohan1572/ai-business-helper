@@ -1,0 +1,90 @@
+/* General Dashboard Styles */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align horizontally */
+  justify-content: center; /* Center align vertically */
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f4f7fb;
+  text-align: center; /* Center the text in the dashboard */
+}
+
+.dashboard-header {
+  margin-bottom: 20px;
+}
+
+.dashboard-header h1 {
+  font-size: 28px;
+  color: #333;
+  font-weight: bold;
+}
+
+.dashboard-header p {
+  font-size: 16px;
+  color: #777;
+}
+
+/* Bubbles Container */
+.bubbles-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Ensure bubbles are centered horizontally */
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%; /* Ensure the container takes full width */
+  max-width: 1200px; /* Add max-width to avoid stretching */
+}
+
+.bubble {
+  background-color: #ffffff;
+  border: 1px solid #007bff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 150px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.bubble:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.bubble-icon {
+  font-size: 30px;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.bubble-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.bubble-description {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Button to navigate to the form */
+.button-container {
+  margin-top: 40px;
+}
+
+.start-button {
+  padding: 12px 25px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.start-button:hover {
+  background-color: #0056b3;
+}

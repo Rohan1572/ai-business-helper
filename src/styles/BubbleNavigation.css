@@ -1,0 +1,22 @@
+.bubble-navigation {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.bubble-button {
+  background-color: #28a745;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.bubble-button:hover {
+  background-color: #218838;
+}

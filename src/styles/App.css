@@ -1,0 +1,98 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  background-color: #f4f7fb; /* Light gray background */
+  color: #333;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+/* Main container for the app */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* General styles for the App */
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.app-header h1 {
+  font-size: 36px;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.app-header p {
+  font-size: 18px;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Links and Buttons */
+.link-button {
+  padding: 12px 25px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.link-button:hover {
+  background-color: #0056b3;
+  text-decoration: none;
+}
+
+/* Optional Global Styling for Sections */
+.section {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.section h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.section p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Centered Container */
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* For error pages or missing content */
+.error-message {
+  font-size: 20px;
+  color: red;
+  text-align: center;
+  margin-top: 50px;
+}
