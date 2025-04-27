@@ -1,28 +1,30 @@
 import axios from "axios";
 
-// Create an axios instance for OpenAI API
-const openaiInstance = axios.create({
-  baseURL: "https://api.openai.com/v1/chat/completions",
+if (!process.env.REACT_APP_OPENAI_API_KEY) {
+  console.warn("⚠️ Missing REACT_APP_OPENAI_API_KEY in .env");
+}
+
+// Create an Axios instance for the OpenAI API
+const openai = axios.create({
+  baseURL: "https://api.openai.com/v1",
   headers: {
-    Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`, // Use environment variable
     "Content-Type": "application/json",
+    Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
   },
 });
 
-// Function to send prompt to OpenAI API
+// Function to send a prompt and return the AI’s reply
 export const sendPrompt = async (userPrompt) => {
   try {
-    const response = await openaiInstance.post("", {
-      model: "gpt-4.1",
+    const { data } = await openai.post("/chat/completions", {
+      model: "gpt-4", // or "gpt-4" if you have access
       messages: [{ role: "user", content: userPrompt }],
       temperature: 0.7,
     });
 
-    // Return the generated content
-    return response.data.choices[0].message.content;
-  } catch (error) {
-    // Log and throw error for further handling
-    console.error("OpenAI API error:", error.response || error.message);
-    throw error;
+    return data.choices?.[0]?.message?.content || "";
+  } catch (err) {
+    console.error("OpenAI API error:", err.response?.data || err.message);
+    throw new Error("There was a problem fetching your AI response.");
   }
 };
