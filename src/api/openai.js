@@ -1,15 +1,15 @@
 import axios from "axios";
 
-
-
+// Create an axios instance for OpenAI API
 const openaiInstance = axios.create({
   baseURL: "https://api.openai.com/v1/chat/completions",
   headers: {
-    Authorization: `Bearer ${API_KEY}`,
+    Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`, // Use environment variable
     "Content-Type": "application/json",
   },
 });
 
+// Function to send prompt to OpenAI API
 export const sendPrompt = async (userPrompt) => {
   try {
     const response = await openaiInstance.post("", {
@@ -17,8 +17,11 @@ export const sendPrompt = async (userPrompt) => {
       messages: [{ role: "user", content: userPrompt }],
       temperature: 0.7,
     });
+
+    // Return the generated content
     return response.data.choices[0].message.content;
   } catch (error) {
+    // Log and throw error for further handling
     console.error("OpenAI API error:", error.response || error.message);
     throw error;
   }
