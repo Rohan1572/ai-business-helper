@@ -1,65 +1,172 @@
-.landing-page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-  background-color: #f5f7fa;
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.landing-title {
-  font-size: 36px;
-  margin-bottom: 10px;
+body {
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(
+    to right,
+    #ff7e5f,
+    #feb47b
+  ); /* Red-Orange gradient background */
   color: #333;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.landing-subtitle {
-  font-size: 20px;
-  margin-bottom: 30px;
+.landing-page {
+  width: 100%;
+  max-width: 1200px;
+  padding: 30px 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.landing-header {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #ffffff; /* White background for header */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.landing-header h1 {
+  font-size: 2.2rem; /* Smaller font size */
+  font-weight: 700;
+  color: #ff7e5f; /* Red color */
+  margin-bottom: 10px;
+}
+
+.landing-header p {
+  font-size: 1rem; /* Smaller font size */
+  font-weight: 300;
+  color: #555;
+}
+
+.business-name-section,
+.form-section {
+  background-color: #ffffff;
+  padding: 30px 20px;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.business-name-section h2,
+.form-section h3 {
+  color: #333;
+  font-size: 1.8rem; /* Slightly smaller font size */
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.business-name-section p,
+.form-section p {
   color: #666;
+  font-size: 0.9rem; /* Smaller font size */
+  margin-bottom: 20px;
 }
 
-.landing-form {
+.business-name-form input {
   width: 100%;
   max-width: 400px;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  font-size: 0.95rem; /* Slightly smaller font size */
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.form-group {
-  margin-bottom: 20px;
-  text-align: left;
+.business-name-form input:focus {
+  outline: none;
+  border-color: #ff7e5f;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: #444;
-}
-
-.form-group input {
+.business-name-form button {
   width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-}
-
-.start-button {
-  width: 100%;
+  max-width: 400px;
   padding: 12px;
-  background-color: #007bff;
+  font-size: 1.1rem; /* Slightly smaller font size */
+  background-color: #ff7e5f;
   color: white;
-  font-size: 18px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.start-button:hover {
-  background-color: #0056b3;
+.business-name-form button:hover {
+  background-color: #feb47b;
+}
+
+.form-section {
+  text-align: center;
+}
+
+.form-section input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 15px;
+  font-size: 0.95rem; /* Slightly smaller font size */
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-section button {
+  padding: 12px 20px;
+  font-size: 1.1rem; /* Slightly smaller font size */
+  background-color: #ff7e5f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-section button:hover {
+  background-color: #feb47b;
+}
+
+.landing-footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
+  border-radius: 10px;
+}
+
+.landing-footer p {
+  font-size: 0.9rem; /* Smaller font size */
+  margin: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .landing-header {
+    padding: 30px 20px;
+  }
+
+  .business-name-form input,
+  .business-name-form button {
+    max-width: 100%;
+  }
+
+  .form-section input,
+  .form-section button {
+    max-width: 100%;
+  }
 }

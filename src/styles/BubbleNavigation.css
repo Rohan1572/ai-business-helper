@@ -1,22 +1,43 @@
+/* BubbleNavigation.css */
 .bubble-navigation {
   display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
 }
 
 .bubble-button {
-  background-color: #28a745;
+  padding: 20px 35px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  background: linear-gradient(
+    45deg,
+    #ff7e5f,
+    #feb47b
+  ); /* Default gradient background */
   color: white;
-  padding: 15px;
-  font-size: 18px;
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
   border: none;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  text-align: center;
+  text-transform: capitalize;
+  display: inline-block;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.bubble-button:hover {
-  background-color: #218838;
+.bubble-button.active {
+  background: linear-gradient(
+    45deg,
+    #ff5722,
+    #e64a19
+  ); /* Darker gradient when selected */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow when selected */
+}
+
+.bubble-button:focus {
+  outline: none; /* Remove outline for a cleaner look */
+  box-shadow: 0 0 0 3px rgba(255, 122, 95, 0.6); /* Focus ring */
 }

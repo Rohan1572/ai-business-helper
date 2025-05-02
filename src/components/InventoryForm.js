@@ -1,41 +1,56 @@
 import React, { useState } from "react";
+import "../styles/InventoryForm.css";
+import { sendPrompt } from "../api/openai";
 
-function InventoryForm() {
-  const [productType, setProductType] = useState("");
+const InventoryForm = () => {
+  const [data, setData] = useState({ item: "", details: "" });
+  const [output, setOutput] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const generatePrompt = ({ item, details }) =>
+    `Create a concise product description for ${item} with these specifications: ${details}. Emphasize key features and ideal uses.`;
+
+  const handleChange = (e) =>
+    setData({ ...data, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Creating inventory sheet for: ${productType}`);
+    setLoading(true);
+    const prompt = generatePrompt(data);
+    try {
+      const result = await sendPrompt(prompt);
+      setOutput(result);
+    } catch {
+      setOutput("Failed to generate product description.");
+    }
+    setLoading(false);
   };
 
   return (
-    <div>
-      <h2>Inventory Management 📦</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="form-container">
+      <h3>Product Description Generator</h3>
+      <form onSubmit={handleSubmit} className="form">
+        <label>Item Name</label>
         <input
-          type="text"
-          placeholder="Type of products (e.g. Bakery items, Electronics)"
-          value={productType}
-          onChange={(e) => setProductType(e.target.value)}
-          style={{ padding: "0.5rem", width: "80%", marginBottom: "1rem" }}
+          name="item"
+          value={data.item}
+          onChange={handleChange}
+          placeholder="e.g. Wireless Earbuds"
         />
-        <br />
-        <button
-          type="submit"
-          style={{
-            padding: "0.7rem 1.5rem",
-            backgroundColor: "#3b82f6",
-            border: "none",
-            borderRadius: "8px",
-            color: "white",
-            cursor: "pointer",
-          }}
-        >
-          Create Spreadsheet
+        <label>Specifications</label>
+        <textarea
+          name="details"
+          value={data.details}
+          onChange={handleChange}
+          placeholder="e.g. Bluetooth 5.2, 24-hour battery life"
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? "Generating..." : "Generate Description"}
         </button>
       </form>
+      {output && <div className="output-box">{output}</div>}
     </div>
   );
-}
+};
 
 export default InventoryForm;

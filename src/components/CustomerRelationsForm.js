@@ -1,45 +1,55 @@
 import React, { useState } from "react";
+import "../styles/CustomerRelations.css";
+import { sendPrompt } from "../api/openai";
 
-function CustomerRelations() {
-  const [review, setReview] = useState("");
+const CustomerRelationsForm = () => {
+  const [data, setData] = useState({ issue: "", tone: "polite" });
+  const [output, setOutput] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const generatePrompt = ({ issue, tone }) =>
+    `Draft a ${tone} response to a customer complaint about: ${issue}. Ensure the message maintains professionalism and resolves the concern.`;
+
+  const handleChange = (e) =>
+    setData({ ...data, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Generated response for review: ${review}`);
+    setLoading(true);
+    const prompt = generatePrompt(data);
+    try {
+      const result = await sendPrompt(prompt);
+      setOutput(result);
+    } catch {
+      setOutput("Failed to generate response.");
+    }
+    setLoading(false);
   };
 
   return (
-    <div>
-      <h2>Customer Relations 🤝</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="form-container">
+      <h3>Customer Complaint Response</h3>
+      <form onSubmit={handleSubmit} className="form">
+        <label>Customer Issue</label>
         <textarea
-          placeholder="Paste a customer review here..."
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
-          style={{
-            padding: "0.5rem",
-            width: "80%",
-            height: "120px",
-            marginBottom: "1rem",
-          }}
+          name="issue"
+          value={data.issue}
+          onChange={handleChange}
+          placeholder="Describe the issue..."
         />
-        <br />
-        <button
-          type="submit"
-          style={{
-            padding: "0.7rem 1.5rem",
-            backgroundColor: "#6366f1",
-            border: "none",
-            borderRadius: "8px",
-            color: "white",
-            cursor: "pointer",
-          }}
-        >
-          Generate Reply
+        <label>Response Tone</label>
+        <select name="tone" value={data.tone} onChange={handleChange}>
+          <option value="polite">Polite</option>
+          <option value="apologetic">Apologetic</option>
+          <option value="firm">Firm</option>
+        </select>
+        <button type="submit" disabled={loading}>
+          {loading ? "Generating..." : "Generate Response"}
         </button>
       </form>
+      {output && <div className="output-box">{output}</div>}
     </div>
   );
-}
+};
 
-export default CustomerRelations;
+export default CustomerRelationsForm;

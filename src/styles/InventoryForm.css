@@ -37,7 +37,7 @@ textarea {
 
 button {
   padding: 10px;
-  background-color: #007bff;
+  background-color: #28a745;
   color: white;
   border: none;
   border-radius: 4px;
@@ -52,8 +52,8 @@ button:disabled {
 .output-box {
   margin-top: 20px;
   padding: 15px;
-  background-color: #e7f7d4;
-  border: 1px solid #b1e2a1;
+  background-color: #d4f7e7;
+  border: 1px solid #a1e2b1;
   border-radius: 4px;
-  color: #4f9d44;
+  color: #49a249;
 }

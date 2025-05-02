@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MarketingForm from "../components/MarketingForm";
 import LegalForm from "../components/LegalForm";
 import CustomerRelationsForm from "../components/CustomerRelationsForm";
@@ -9,6 +10,7 @@ import "../styles/Dashboard.css"; // Make sure you create this file!
 
 function Dashboard({ businessName, businessType }) {
   const [selectedBubble, setSelectedBubble] = useState("");
+  const navigate = useNavigate();
 
   const renderBubbleContent = () => {
     switch (selectedBubble) {
@@ -53,9 +55,19 @@ function Dashboard({ businessName, businessType }) {
     }
   };
 
+  const handleBackClick = () => {
+    navigate("/"); // Navigate back to the landing page
+  };
+
   return (
     <div className="dashboard-container">
       <h1 className="dashboard-title">Choose a Department 🏢</h1>
+
+      {/* Back Button */}
+      <button className="back-button" onClick={handleBackClick}>
+        Back to Landing Page
+      </button>
+
       <div className="bubbles-container">
         {[
           "Marketing",

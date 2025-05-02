@@ -1,45 +1,56 @@
 import React, { useState } from "react";
+import "../styles/LegalForm.css";
+import { sendPrompt } from "../api/openai";
 
-function LegalForm() {
-  const [docType, setDocType] = useState("");
+const LegalForm = () => {
+  const [data, setData] = useState({ type: "", parties: "" });
+  const [output, setOutput] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const generatePrompt = ({ type, parties }) =>
+    `Draft a basic ${type} agreement between ${parties}. Include responsibilities, key terms, and any legal considerations.`;
+
+  const handleChange = (e) =>
+    setData({ ...data, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Generating a sample ${docType}`);
+    setLoading(true);
+    const prompt = generatePrompt(data);
+    try {
+      const result = await sendPrompt(prompt);
+      setOutput(result);
+    } catch {
+      setOutput("Failed to generate legal document.");
+    }
+    setLoading(false);
   };
 
   return (
-    <div>
-      <h2>Legal Help 🧾</h2>
-      <form onSubmit={handleSubmit}>
-        <select
-          value={docType}
-          onChange={(e) => setDocType(e.target.value)}
-          style={{ padding: "0.5rem", width: "80%", marginBottom: "1rem" }}
-        >
-          <option value="">Select Document Type</option>
-          <option value="Refund Policy">Refund Policy</option>
-          <option value="Waiver Form">Waiver Form</option>
-          <option value="Hiring Letter">Hiring Letter</option>
-          <option value="Service Agreement">Service Agreement</option>
-        </select>
-        <br />
-        <button
-          type="submit"
-          style={{
-            padding: "0.7rem 1.5rem",
-            backgroundColor: "#10b981",
-            border: "none",
-            borderRadius: "8px",
-            color: "white",
-            cursor: "pointer",
-          }}
-        >
-          Generate Document
+    <div className="form-container">
+      <h3>Legal Agreement Generator</h3>
+      <form onSubmit={handleSubmit} className="form">
+        <label>Type of Agreement</label>
+        <input
+          name="type"
+          value={data.type}
+          onChange={handleChange}
+          placeholder="e.g. NDA, Lease Agreement"
+        />
+        <label>Parties Involved</label>
+        <textarea
+          name="parties"
+          value={data.parties}
+          onChange={handleChange}
+          placeholder="e.g. Company A and Freelancer B"
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? "Generating..." : "Generate Document"}
         </button>
       </form>
+      {output && <div className="output-box">{output}</div>}
     </div>
   );
-}
+};
 
 export default LegalForm;
