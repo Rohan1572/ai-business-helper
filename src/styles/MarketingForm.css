@@ -52,3 +52,15 @@ button:disabled {
   border-radius: 4px;
   color: #4f9d44;
 }
+
+.image-preview {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.image-preview img {
+  width: 100%;
+  max-width: 512px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
