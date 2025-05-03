@@ -1,0 +1,9 @@
+.app-header {
+  background: linear-gradient(to right, #ff4e00, #ec9f05);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

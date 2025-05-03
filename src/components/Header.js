@@ -1,6 +1,12 @@
-export const Header = () => (
-  <header>
-    <h1>AI Assistant Forms</h1>
-    <hr />
-  </header>
-);
+import React from "react";
+import "../styles/Header.css";
+
+const Header = () => {
+  return (
+    <header className="app-header">
+      <h1>AI Business Assistant</h1>
+    </header>
+  );
+};
+
+export default Header;
