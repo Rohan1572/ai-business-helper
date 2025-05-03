@@ -1,115 +1,79 @@
-/* General Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* LegalForm.css */
 
-body {
-  font-family: "Roboto", sans-serif;
-  background: linear-gradient(
-    to right,
-    #ff7e5f,
-    #feb47b
-  ); /* Red-Orange Gradient */
-  color: #333;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.landing-page {
-  width: 100%;
+.form-container {
   max-width: 600px;
-  padding: 30px;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  margin: 40px auto;
+  padding: 2rem;
+  background: #f9f9f9;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.landing-title {
-  font-size: 2rem;
-  color: #ff7e5f;
+.form-container h3 {
   text-align: center;
-  margin-bottom: 15px;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #333;
 }
 
-.landing-subtitle {
-  font-size: 1rem;
-  color: #555;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.landing-form {
+.form {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
-.form-group {
-  width: 100%;
-  margin-bottom: 15px;
+.form label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #444;
 }
 
-.form-group label {
-  font-size: 0.95rem;
-  font-weight: 500;
-  margin-bottom: 5px;
-  display: block;
-  color: #333;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
+.form input,
+.form textarea {
+  padding: 10px 12px;
+  margin-bottom: 1.2rem;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #f8f8f8;
-  color: #333;
+  font-size: 1rem;
+  width: 100%;
 }
 
-.form-group input:focus {
-  outline: none;
-  border-color: #ff7e5f;
-  box-shadow: 0 0 5px rgba(255, 126, 95, 0.5);
+.form textarea {
+  min-height: 100px;
+  resize: vertical;
 }
 
-.start-button {
-  padding: 12px 20px;
-  font-size: 1.1rem;
-  background-color: #ff7e5f;
-  color: white;
+button[type="submit"] {
+  background: #2d72d9;
+  color: #fff;
+  padding: 12px 16px;
   border: none;
   border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-  max-width: 250px;
+  transition: background 0.3s ease;
 }
 
-.start-button:hover {
-  background-color: #feb47b;
+button[type="submit"]:hover {
+  background: #1c5fc3;
 }
 
-.start-button:disabled {
-  background-color: #e0e0e0;
-  cursor: not-allowed;
+.output-box {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #eef4ff;
+  border-left: 4px solid #2d72d9;
+  border-radius: 8px;
+  white-space: pre-wrap;
+  color: #222;
 }
 
-@media (max-width: 768px) {
-  .landing-page {
-    padding: 20px;
+@media (max-width: 600px) {
+  .form-container {
+    padding: 1.2rem;
+    margin: 20px 1rem;
   }
 
-  .landing-title {
-    font-size: 1.8rem;
-  }
-
-  .landing-subtitle {
-    font-size: 0.9rem;
+  .form-container h3 {
+    font-size: 1.2rem;
   }
 }
