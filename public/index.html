@@ -23,6 +23,18 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>AI Business Helper</title>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWG2XG6XS5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-DWG2XG6XS5', {
+      send_page_view: false  // we’ll send manually on route change
+    });
+  </script>
+
 </head>
 
 <body>
