@@ -69,11 +69,16 @@ function Dashboard({ businessName, businessType }) {
   const renderContent = () => {
     const props = { businessName, businessType };
     switch (selectedModule) {
-      case "Marketing": return <MarketingForm {...props} />;
-      case "Legal": return <LegalForm {...props} />;
-      case "Customer Relations": return <CustomerRelationsForm {...props} />;
-      case "Inventory": return <InventoryForm {...props} />;
-      case "HR & Hiring": return <HRHiringForm {...props} />;
+      case "Marketing":
+        return <MarketingForm {...props} />;
+      case "Legal":
+        return <LegalForm {...props} />;
+      case "Customer Relations":
+        return <CustomerRelationsForm {...props} />;
+      case "Inventory":
+        return <InventoryForm {...props} />;
+      case "HR & Hiring":
+        return <HRHiringForm {...props} />;
       default:
         return (
           <>
@@ -82,12 +87,18 @@ function Dashboard({ businessName, businessType }) {
               <div>
                 <p className="topbar-greeting">Good day 👋</p>
                 <h1 className="topbar-title">
-                  {businessName
-                    ? <><span className="gradient-text">{businessName}</span>'s Dashboard</>
-                    : "Your Dashboard"}
+                  {businessName ? (
+                    <>
+                      <span className="gradient-text">{businessName}</span>'s
+                      Dashboard
+                    </>
+                  ) : (
+                    "Your Dashboard"
+                  )}
                 </h1>
                 <p className="topbar-desc">
-                  Choose a department below to start generating AI-powered content.
+                  Choose a department below to start generating AI-powered
+                  content.
                 </p>
               </div>
             </div>
@@ -99,7 +110,7 @@ function Dashboard({ businessName, businessType }) {
                   key={mod.id}
                   className="module-card"
                   onClick={() => setSelectedModule(mod.id)}
-                  style={{ '--card-gradient': mod.gradient }}
+                  style={{ "--card-gradient": mod.gradient }}
                 >
                   <div
                     className="module-card-icon"
@@ -107,8 +118,20 @@ function Dashboard({ businessName, businessType }) {
                   >
                     {mod.icon}
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                    <h3 className="module-card-title" style={{ marginBottom: 0 }}>{mod.title}</h3>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                      marginBottom: 8,
+                    }}
+                  >
+                    <h3
+                      className="module-card-title"
+                      style={{ marginBottom: 0 }}
+                    >
+                      {mod.title}
+                    </h3>
                     <span className="badge badge-accent">{mod.tag}</span>
                   </div>
                   <p className="module-card-desc">{mod.desc}</p>
@@ -139,10 +162,15 @@ function Dashboard({ businessName, businessType }) {
           {(businessName || businessType) && (
             <div className="business-badge-inline">
               <div className="business-avatar">🏢</div>
-              <span className="business-name-inline">{businessName || "Your Business"}</span>
+              <span className="business-name-inline">
+                {businessName || "Your Business"}
+              </span>
             </div>
           )}
-          <button className="btn-secondary back-btn" onClick={() => navigate("/")}>
+          <button
+            className="btn-secondary back-btn"
+            onClick={() => navigate("/")}
+          >
             ← Back to Home
           </button>
         </div>

@@ -32,7 +32,9 @@ const LegalForm = ({ businessName }) => {
     <div className="form-panel">
       <div className="form-card">
         <div className="form-field">
-          <label className="field-label" htmlFor="legal-type">Type of Agreement</label>
+          <label className="field-label" htmlFor="legal-type">
+            Type of Agreement
+          </label>
           <input
             id="legal-type"
             name="type"
@@ -44,7 +46,9 @@ const LegalForm = ({ businessName }) => {
         </div>
 
         <div className="form-field" style={{ marginBottom: 0 }}>
-          <label className="field-label" htmlFor="legal-parties">Parties Involved</label>
+          <label className="field-label" htmlFor="legal-parties">
+            Parties Involved
+          </label>
           <textarea
             id="legal-parties"
             name="parties"
@@ -63,7 +67,9 @@ const LegalForm = ({ businessName }) => {
           disabled={loading || !isValid}
         >
           {loading ? (
-            <><span className="spinner" /> Drafting…</>
+            <>
+              <span className="spinner" /> Drafting…
+            </>
           ) : (
             "✦ Generate Document"
           )}

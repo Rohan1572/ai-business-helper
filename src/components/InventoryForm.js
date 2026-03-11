@@ -32,7 +32,9 @@ const InventoryForm = ({ businessName, businessType }) => {
     <div className="form-panel">
       <div className="form-card">
         <div className="form-field">
-          <label className="field-label" htmlFor="inv-item">Item / Product Name</label>
+          <label className="field-label" htmlFor="inv-item">
+            Item / Product Name
+          </label>
           <input
             id="inv-item"
             name="item"
@@ -44,7 +46,9 @@ const InventoryForm = ({ businessName, businessType }) => {
         </div>
 
         <div className="form-field" style={{ marginBottom: 0 }}>
-          <label className="field-label" htmlFor="inv-details">Specifications & Features</label>
+          <label className="field-label" htmlFor="inv-details">
+            Specifications & Features
+          </label>
           <textarea
             id="inv-details"
             name="details"
@@ -64,7 +68,9 @@ const InventoryForm = ({ businessName, businessType }) => {
           disabled={loading || !isValid}
         >
           {loading ? (
-            <><span className="spinner" /> Generating…</>
+            <>
+              <span className="spinner" /> Generating…
+            </>
           ) : (
             "✦ Generate Description"
           )}

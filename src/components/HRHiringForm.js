@@ -3,7 +3,11 @@ import { sendPrompt } from "../api/openai";
 import OutputBox from "./OutputBox";
 
 const HRHiringForm = ({ businessName, businessType }) => {
-  const [data, setData] = useState({ position: "", qualities: "", experience: "" });
+  const [data, setData] = useState({
+    position: "",
+    qualities: "",
+    experience: "",
+  });
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -32,7 +36,9 @@ const HRHiringForm = ({ businessName, businessType }) => {
     <div className="form-panel">
       <div className="form-card">
         <div className="form-field">
-          <label className="field-label" htmlFor="hr-position">Job Title / Position</label>
+          <label className="field-label" htmlFor="hr-position">
+            Job Title / Position
+          </label>
           <input
             id="hr-position"
             name="position"
@@ -44,7 +50,9 @@ const HRHiringForm = ({ businessName, businessType }) => {
         </div>
 
         <div className="form-field">
-          <label className="field-label" htmlFor="hr-qualities">Required Skills & Qualities</label>
+          <label className="field-label" htmlFor="hr-qualities">
+            Required Skills & Qualities
+          </label>
           <textarea
             id="hr-qualities"
             name="qualities"
@@ -57,7 +65,18 @@ const HRHiringForm = ({ businessName, businessType }) => {
         </div>
 
         <div className="form-field" style={{ marginBottom: 0 }}>
-          <label className="field-label" htmlFor="hr-experience">Experience Required <span style={{ textTransform: "none", fontWeight: 400, color: "var(--text-muted)" }}>(optional)</span></label>
+          <label className="field-label" htmlFor="hr-experience">
+            Experience Required{" "}
+            <span
+              style={{
+                textTransform: "none",
+                fontWeight: 400,
+                color: "var(--text-muted)",
+              }}
+            >
+              (optional)
+            </span>
+          </label>
           <input
             id="hr-experience"
             name="experience"
@@ -76,7 +95,9 @@ const HRHiringForm = ({ businessName, businessType }) => {
           disabled={loading || !isValid}
         >
           {loading ? (
-            <><span className="spinner" /> Generating…</>
+            <>
+              <span className="spinner" /> Generating…
+            </>
           ) : (
             "✦ Generate Job Description"
           )}

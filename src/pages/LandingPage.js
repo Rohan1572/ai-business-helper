@@ -47,7 +47,8 @@ function LandingPage({ setBusinessName, setBusinessType }) {
           <span className="gradient-text">business assistant</span>
         </h1>
         <p className="landing-subtitle">
-          From marketing copy to legal documents — handle every department with the power of AI. Let's set up your workspace in seconds.
+          From marketing copy to legal documents — handle every department with
+          the power of AI. Let's set up your workspace in seconds.
         </p>
 
         {/* Form card */}

@@ -137,7 +137,10 @@
   border-radius: var(--radius-lg);
   padding: 32px;
   cursor: pointer;
-  transition: box-shadow 0.25s, border-color 0.25s, background 0.25s;
+  transition:
+    box-shadow 0.25s,
+    border-color 0.25s,
+    background 0.25s;
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(16px);
@@ -145,7 +148,7 @@
 }
 
 .module-card::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: var(--card-gradient, var(--gradient));
@@ -154,7 +157,9 @@
 }
 
 .module-card:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--shadow-glow);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    var(--shadow-glow);
   border-color: var(--border-active);
 }
 

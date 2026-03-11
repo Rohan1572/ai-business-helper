@@ -39,7 +39,9 @@ const CustomerRelationsForm = ({ businessName }) => {
     <div className="form-panel">
       <div className="form-card">
         <div className="form-field">
-          <label className="field-label" htmlFor="cr-issue">Customer Issue</label>
+          <label className="field-label" htmlFor="cr-issue">
+            Customer Issue
+          </label>
           <textarea
             id="cr-issue"
             name="issue"
@@ -52,7 +54,9 @@ const CustomerRelationsForm = ({ businessName }) => {
         </div>
 
         <div className="form-field" style={{ marginBottom: 0 }}>
-          <label className="field-label" htmlFor="cr-tone">Response Tone</label>
+          <label className="field-label" htmlFor="cr-tone">
+            Response Tone
+          </label>
           <select
             id="cr-tone"
             name="tone"
@@ -61,7 +65,9 @@ const CustomerRelationsForm = ({ businessName }) => {
             onChange={handleChange}
           >
             {TONES.map((t) => (
-              <option key={t.value} value={t.value}>{t.label}</option>
+              <option key={t.value} value={t.value}>
+                {t.label}
+              </option>
             ))}
           </select>
         </div>
@@ -74,7 +80,9 @@ const CustomerRelationsForm = ({ businessName }) => {
           disabled={loading || !isValid}
         >
           {loading ? (
-            <><span className="spinner" /> Drafting…</>
+            <>
+              <span className="spinner" /> Drafting…
+            </>
           ) : (
             "✦ Generate Response"
           )}

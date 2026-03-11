@@ -1,5 +1,5 @@
 /* ===== DESIGN SYSTEM – AI Business Helper ===== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
 /* ── CSS Variables ── */
 :root {
@@ -30,8 +30,8 @@
   --warning: #f5a623;
 
   /* Typography */
-  --font-body: 'Inter', sans-serif;
-  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
 
   /* Spacing */
   --radius-sm: 8px;
@@ -76,7 +76,7 @@ body {
 /* ── Background Orbs ── */
 body::before,
 body::after {
-  content: '';
+  content: "";
   position: fixed;
   border-radius: 50%;
   pointer-events: none;
@@ -163,7 +163,10 @@ h4 {
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease-smooth), opacity 0.2s;
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease-smooth),
+    opacity 0.2s;
   box-shadow: var(--shadow-btn);
   position: relative;
   overflow: hidden;
@@ -171,7 +174,7 @@ h4 {
 }
 
 .btn-primary::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent);
@@ -238,7 +241,10 @@ h4 {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
   caret-color: var(--accent-1);
 }
 

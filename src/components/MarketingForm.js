@@ -38,7 +38,9 @@ const MarketingForm = ({ businessName, businessType }) => {
       setOutput(textResult);
       setImageUrl(imageResult);
     } catch {
-      setError("Failed to generate content. Please check your API key and try again.");
+      setError(
+        "Failed to generate content. Please check your API key and try again."
+      );
     }
     setLoading(false);
   };
@@ -49,7 +51,9 @@ const MarketingForm = ({ businessName, businessType }) => {
     <div className="form-panel">
       <div className="form-card">
         <div className="form-field">
-          <label className="field-label" htmlFor="mkt-business">Business Name</label>
+          <label className="field-label" htmlFor="mkt-business">
+            Business Name
+          </label>
           <input
             id="mkt-business"
             name="business"
@@ -61,7 +65,9 @@ const MarketingForm = ({ businessName, businessType }) => {
         </div>
 
         <div className="form-field">
-          <label className="field-label" htmlFor="mkt-offer">Special Offer</label>
+          <label className="field-label" htmlFor="mkt-offer">
+            Special Offer
+          </label>
           <input
             id="mkt-offer"
             name="offer"
@@ -73,7 +79,9 @@ const MarketingForm = ({ businessName, businessType }) => {
         </div>
 
         <div className="form-field" style={{ marginBottom: 0 }}>
-          <label className="field-label" htmlFor="mkt-cta">Call to Action</label>
+          <label className="field-label" htmlFor="mkt-cta">
+            Call to Action
+          </label>
           <input
             id="mkt-cta"
             name="callToAction"
@@ -92,7 +100,9 @@ const MarketingForm = ({ businessName, businessType }) => {
           disabled={loading || !isValid}
         >
           {loading ? (
-            <><span className="spinner" /> Generating…</>
+            <>
+              <span className="spinner" /> Generating…
+            </>
           ) : (
             "✦ Generate Content & Image"
           )}
