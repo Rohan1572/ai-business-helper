@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import "../styles/HRHiring.css";
 import { sendPrompt } from "../api/openai";
+import OutputBox from "./OutputBox";
 
-const HRForm = () => {
-  const [data, setData] = useState({ position: "", qualities: "" });
+const HRHiringForm = ({ businessName, businessType }) => {
+  const [data, setData] = useState({ position: "", qualities: "", experience: "" });
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const generatePrompt = ({ position, qualities }) =>
-    `Write a professional job description for a ${position} requiring: ${qualities}. Include responsibilities, qualifications, and application instructions.`;
+  const [error, setError] = useState("");
 
   const handleChange = (e) =>
     setData({ ...data, [e.target.name]: e.target.value });
@@ -16,41 +14,84 @@ const HRForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const prompt = generatePrompt(data);
+    setOutput("");
+    setError("");
+    const prompt = `Write a professional, engaging job description for a ${data.position} position${businessName ? ` at ${businessName}` : ""}${businessType ? ` (a ${businessType})` : ""}. Required qualities: ${data.qualities}.${data.experience ? ` Required experience: ${data.experience}.` : ""} Include: role overview, key responsibilities, required qualifications, preferred skills, and application instructions. Make it sound like a great place to work.`;
     try {
       const result = await sendPrompt(prompt);
       setOutput(result);
     } catch {
-      setOutput("Failed to generate job description.");
+      setError("Failed to generate job description. Please try again.");
     }
     setLoading(false);
   };
 
+  const isValid = data.position.trim() && data.qualities.trim();
+
   return (
-    <div className="form-container">
-      <h3>Job Description Generator</h3>
-      <form onSubmit={handleSubmit} className="form">
-        <label>Job Title</label>
-        <input
-          name="position"
-          value={data.position}
-          onChange={handleChange}
-          placeholder="e.g. Marketing Manager"
-        />
-        <label>Required Qualities</label>
-        <textarea
-          name="qualities"
-          value={data.qualities}
-          onChange={handleChange}
-          placeholder="e.g. Communication, Time management"
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Generating..." : "Generate JD"}
+    <div className="form-panel">
+      <div className="form-card">
+        <div className="form-field">
+          <label className="field-label" htmlFor="hr-position">Job Title / Position</label>
+          <input
+            id="hr-position"
+            name="position"
+            className="field-input"
+            value={data.position}
+            onChange={handleChange}
+            placeholder="e.g. Senior Marketing Manager"
+          />
+        </div>
+
+        <div className="form-field">
+          <label className="field-label" htmlFor="hr-qualities">Required Skills & Qualities</label>
+          <textarea
+            id="hr-qualities"
+            name="qualities"
+            className="field-textarea"
+            value={data.qualities}
+            onChange={handleChange}
+            placeholder="e.g. Strong communication, content strategy, Google Ads proficiency, team leadership"
+            style={{ minHeight: 100 }}
+          />
+        </div>
+
+        <div className="form-field" style={{ marginBottom: 0 }}>
+          <label className="field-label" htmlFor="hr-experience">Experience Required <span style={{ textTransform: "none", fontWeight: 400, color: "var(--text-muted)" }}>(optional)</span></label>
+          <input
+            id="hr-experience"
+            name="experience"
+            className="field-input"
+            value={data.experience}
+            onChange={handleChange}
+            placeholder="e.g. 3+ years in digital marketing"
+          />
+        </div>
+      </div>
+
+      <div className="form-submit-row">
+        <button
+          className="btn-primary form-submit-btn"
+          onClick={handleSubmit}
+          disabled={loading || !isValid}
+        >
+          {loading ? (
+            <><span className="spinner" /> Generating…</>
+          ) : (
+            "✦ Generate Job Description"
+          )}
         </button>
-      </form>
-      {output && <div className="output-box">{output}</div>}
+      </div>
+
+      {error && (
+        <p style={{ marginTop: 16, color: "var(--error)", fontSize: "0.9rem" }}>
+          ⚠ {error}
+        </p>
+      )}
+
+      <OutputBox content={output} title="Job Description" />
     </div>
   );
 };
 
-export default HRForm;
+export default HRHiringForm;

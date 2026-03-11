@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import "../styles/InventoryForm.css";
 import { sendPrompt } from "../api/openai";
+import OutputBox from "./OutputBox";
 
-const InventoryForm = () => {
+const InventoryForm = ({ businessName, businessType }) => {
   const [data, setData] = useState({ item: "", details: "" });
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const generatePrompt = ({ item, details }) =>
-    `Create a concise product description for ${item} with these specifications: ${details}. Emphasize key features and ideal uses.`;
+  const [error, setError] = useState("");
 
   const handleChange = (e) =>
     setData({ ...data, [e.target.name]: e.target.value });
@@ -16,39 +14,70 @@ const InventoryForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const prompt = generatePrompt(data);
+    setOutput("");
+    setError("");
+    const prompt = `Create a compelling, concise product description for ${data.item}${businessName ? ` sold by ${businessName}` : ""}${businessType ? ` (a ${businessType})` : ""}. Specifications: ${data.details}. Emphasize key features, benefits, and ideal use cases. Make it engaging for online shoppers.`;
     try {
       const result = await sendPrompt(prompt);
       setOutput(result);
     } catch {
-      setOutput("Failed to generate product description.");
+      setError("Failed to generate description. Please try again.");
     }
     setLoading(false);
   };
 
+  const isValid = data.item.trim() && data.details.trim();
+
   return (
-    <div className="form-container">
-      <h3>Product Description Generator</h3>
-      <form onSubmit={handleSubmit} className="form">
-        <label>Item Name</label>
-        <input
-          name="item"
-          value={data.item}
-          onChange={handleChange}
-          placeholder="e.g. Wireless Earbuds"
-        />
-        <label>Specifications</label>
-        <textarea
-          name="details"
-          value={data.details}
-          onChange={handleChange}
-          placeholder="e.g. Bluetooth 5.2, 24-hour battery life"
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Generating..." : "Generate Description"}
+    <div className="form-panel">
+      <div className="form-card">
+        <div className="form-field">
+          <label className="field-label" htmlFor="inv-item">Item / Product Name</label>
+          <input
+            id="inv-item"
+            name="item"
+            className="field-input"
+            value={data.item}
+            onChange={handleChange}
+            placeholder="e.g. Wireless Noise-Cancelling Earbuds"
+          />
+        </div>
+
+        <div className="form-field" style={{ marginBottom: 0 }}>
+          <label className="field-label" htmlFor="inv-details">Specifications & Features</label>
+          <textarea
+            id="inv-details"
+            name="details"
+            className="field-textarea"
+            value={data.details}
+            onChange={handleChange}
+            placeholder="e.g. Bluetooth 5.2, 40-hour battery, ANC, USB-C charging, IPX5 water resistant"
+            style={{ minHeight: 110 }}
+          />
+        </div>
+      </div>
+
+      <div className="form-submit-row">
+        <button
+          className="btn-primary form-submit-btn"
+          onClick={handleSubmit}
+          disabled={loading || !isValid}
+        >
+          {loading ? (
+            <><span className="spinner" /> Generating…</>
+          ) : (
+            "✦ Generate Description"
+          )}
         </button>
-      </form>
-      {output && <div className="output-box">{output}</div>}
+      </div>
+
+      {error && (
+        <p style={{ marginTop: 16, color: "var(--error)", fontSize: "0.9rem" }}>
+          ⚠ {error}
+        </p>
+      )}
+
+      <OutputBox content={output} title="Product Description" />
     </div>
   );
 };

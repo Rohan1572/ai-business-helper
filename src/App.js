@@ -30,7 +30,6 @@ function PageTrackingRoutes({
 
   return (
     <div className="app-wrapper">
-      {/* <Header /> */}
       <main>
         <Routes>
           <Route
@@ -53,7 +52,6 @@ function PageTrackingRoutes({
           />
         </Routes>
       </main>
-      {/* <Footer /> */}
     </div>
   );
 }

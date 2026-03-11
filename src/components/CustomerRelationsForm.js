@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import "../styles/CustomerRelations.css";
 import { sendPrompt } from "../api/openai";
+import OutputBox from "./OutputBox";
 
-const CustomerRelationsForm = () => {
+const TONES = [
+  { value: "polite", label: "😊 Polite" },
+  { value: "apologetic", label: "🙏 Apologetic" },
+  { value: "firm", label: "🤝 Firm" },
+  { value: "empathetic", label: "💙 Empathetic" },
+];
+
+const CustomerRelationsForm = ({ businessName }) => {
   const [data, setData] = useState({ issue: "", tone: "polite" });
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const generatePrompt = ({ issue, tone }) =>
-    `Draft a ${tone} response to a customer complaint about: ${issue}. Ensure the message maintains professionalism and resolves the concern.`;
+  const [error, setError] = useState("");
 
   const handleChange = (e) =>
     setData({ ...data, [e.target.name]: e.target.value });
@@ -16,38 +21,73 @@ const CustomerRelationsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const prompt = generatePrompt(data);
+    setOutput("");
+    setError("");
+    const prompt = `Draft a ${data.tone} response${businessName ? ` from ${businessName}` : ""} to a customer complaint about: ${data.issue}. Keep it professional, empathetic, and solution-focused.`;
     try {
       const result = await sendPrompt(prompt);
       setOutput(result);
     } catch {
-      setOutput("Failed to generate response.");
+      setError("Failed to generate response. Please try again.");
     }
     setLoading(false);
   };
 
+  const isValid = data.issue.trim();
+
   return (
-    <div className="form-container">
-      <h3>Customer Complaint Response</h3>
-      <form onSubmit={handleSubmit} className="form">
-        <label>Customer Issue</label>
-        <textarea
-          name="issue"
-          value={data.issue}
-          onChange={handleChange}
-          placeholder="Describe the issue..."
-        />
-        <label>Response Tone</label>
-        <select name="tone" value={data.tone} onChange={handleChange}>
-          <option value="polite">Polite</option>
-          <option value="apologetic">Apologetic</option>
-          <option value="firm">Firm</option>
-        </select>
-        <button type="submit" disabled={loading}>
-          {loading ? "Generating..." : "Generate Response"}
+    <div className="form-panel">
+      <div className="form-card">
+        <div className="form-field">
+          <label className="field-label" htmlFor="cr-issue">Customer Issue</label>
+          <textarea
+            id="cr-issue"
+            name="issue"
+            className="field-textarea"
+            value={data.issue}
+            onChange={handleChange}
+            placeholder="Describe the customer's complaint or issue in detail…"
+            style={{ minHeight: 120 }}
+          />
+        </div>
+
+        <div className="form-field" style={{ marginBottom: 0 }}>
+          <label className="field-label" htmlFor="cr-tone">Response Tone</label>
+          <select
+            id="cr-tone"
+            name="tone"
+            className="field-select"
+            value={data.tone}
+            onChange={handleChange}
+          >
+            {TONES.map((t) => (
+              <option key={t.value} value={t.value}>{t.label}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div className="form-submit-row">
+        <button
+          className="btn-primary form-submit-btn"
+          onClick={handleSubmit}
+          disabled={loading || !isValid}
+        >
+          {loading ? (
+            <><span className="spinner" /> Drafting…</>
+          ) : (
+            "✦ Generate Response"
+          )}
         </button>
-      </form>
-      {output && <div className="output-box">{output}</div>}
+      </div>
+
+      {error && (
+        <p style={{ marginTop: 16, color: "var(--error)", fontSize: "0.9rem" }}>
+          ⚠ {error}
+        </p>
+      )}
+
+      <OutputBox content={output} title="Customer Response" />
     </div>
   );
 };
