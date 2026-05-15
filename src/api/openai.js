@@ -1,7 +1,7 @@
 import axios from "axios";
 
 if (!process.env.REACT_APP_OPENAI_API_KEY) {
-  console.warn("⚠️ Missing REACT_APP_OPENAI_API_KEY in .env");
+  console.warn("Missing REACT_APP_OPENAI_API_KEY in .env");
 }
 
 const openai = axios.create({
@@ -12,7 +12,6 @@ const openai = axios.create({
   },
 });
 
-// ✅ Function to send text prompt
 export const sendPrompt = async (userPrompt) => {
   try {
     const { data } = await openai.post("/chat/completions", {
@@ -28,7 +27,6 @@ export const sendPrompt = async (userPrompt) => {
   }
 };
 
-// ✅ Function to generate image using DALL·E
 export const generateImage = async (imagePrompt) => {
   try {
     const { data } = await openai.post("/images/generations", {

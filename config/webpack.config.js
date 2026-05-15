@@ -12,7 +12,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -65,6 +64,9 @@ const useTailwind = fs.existsSync(
 
 // Get the path to the uncompiled service worker (if it exists).
 const swSrc = paths.swSrc;
+const WorkboxWebpackPlugin = fs.existsSync(swSrc)
+  ? require('workbox-webpack-plugin')
+  : null;
 
 // style files regexes
 const cssRegex = /\.css$/;
@@ -664,6 +666,7 @@ module.exports = function (webpackEnv) {
       // Generate a service worker script that will precache, and keep up to date,
       // the HTML & assets that are part of the webpack build.
       isEnvProduction &&
+        WorkboxWebpackPlugin &&
         fs.existsSync(swSrc) &&
         new WorkboxWebpackPlugin.InjectManifest({
           swSrc,

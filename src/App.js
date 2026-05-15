@@ -10,7 +10,7 @@ function App() {
 
   return (
     <Router>
-      <PageTrackingRoutes
+      <AppRoutes
         businessName={businessName}
         businessType={businessType}
         setBusinessName={setBusinessName}
@@ -20,13 +20,13 @@ function App() {
   );
 }
 
-function PageTrackingRoutes({
+function AppRoutes({
   businessName,
   businessType,
   setBusinessName,
   setBusinessType,
 }) {
-  usePageTracking(); // ✅ Hook runs inside Router context
+  usePageTracking();
 
   return (
     <div className="app-wrapper">

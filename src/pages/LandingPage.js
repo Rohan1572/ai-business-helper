@@ -19,9 +19,11 @@ function LandingPage({ setBusinessName, setBusinessType }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!localBusinessName || !localBusinessType) return;
+
     setIsSubmitting(true);
     setBusinessName(localBusinessName);
     setBusinessType(localBusinessType);
+
     setTimeout(() => {
       navigate("/dashboard");
     }, 1200);
@@ -32,7 +34,6 @@ function LandingPage({ setBusinessName, setBusinessType }) {
   return (
     <div className="landing-root">
       <div className="landing-container">
-        {/* Badge */}
         <div style={{ marginBottom: 4 }}>
           <span className="landing-badge">
             <span className="landing-badge-dot" />
@@ -40,18 +41,16 @@ function LandingPage({ setBusinessName, setBusinessType }) {
           </span>
         </div>
 
-        {/* Heading */}
         <h1 className="landing-title">
           Your AI-powered
           <br />
           <span className="gradient-text">business assistant</span>
         </h1>
         <p className="landing-subtitle">
-          From marketing copy to legal documents — handle every department with
+          From marketing copy to legal documents - handle every department with
           the power of AI. Let's set up your workspace in seconds.
         </p>
 
-        {/* Form card */}
         <div className="landing-card">
           <h2>Set up your business profile</h2>
           <form onSubmit={handleSubmit}>
@@ -84,7 +83,7 @@ function LandingPage({ setBusinessName, setBusinessType }) {
                   id="businessType"
                   type="text"
                   className="field-input"
-                  placeholder="e.g. Nail Salon, Café, Auto Repair"
+                  placeholder="e.g. Nail Salon, Cafe, Auto Repair"
                   value={localBusinessType}
                   onChange={(e) => setLocalBusinessType(e.target.value)}
                   required
@@ -100,7 +99,7 @@ function LandingPage({ setBusinessName, setBusinessType }) {
               {isSubmitting ? (
                 <>
                   <span className="spinner" />
-                  Setting up your workspace…
+                  Setting up your workspace...
                 </>
               ) : (
                 <>
@@ -112,12 +111,11 @@ function LandingPage({ setBusinessName, setBusinessType }) {
           </form>
         </div>
 
-        {/* Feature pills */}
         <div className="features-row">
-          {FEATURES.map((f) => (
-            <span key={f.label} className="feature-pill">
-              <span className="feature-pill-icon">{f.icon}</span>
-              {f.label}
+          {FEATURES.map((feature) => (
+            <span key={feature.label} className="feature-pill">
+              <span className="feature-pill-icon">{feature.icon}</span>
+              {feature.label}
             </span>
           ))}
         </div>

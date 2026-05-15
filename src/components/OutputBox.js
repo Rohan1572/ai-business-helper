@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 
-/**
- * Reusable AI output display box with a copy button.
- */
 function OutputBox({ content, title = "AI Response" }) {
   const [copied, setCopied] = useState(false);
 

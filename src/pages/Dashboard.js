@@ -11,7 +11,6 @@ const MODULES = [
   {
     id: "Marketing",
     icon: "📣",
-    iconClass: "marketing",
     title: "Marketing",
     desc: "Generate compelling social posts, ad copy, and promotional content with AI-generated visuals.",
     color: "#ff6b6b",
@@ -21,7 +20,6 @@ const MODULES = [
   {
     id: "Legal",
     icon: "⚖️",
-    iconClass: "legal",
     title: "Legal Documents",
     desc: "Draft NDAs, lease agreements, and business contracts with professional legal language.",
     color: "#7c61ff",
@@ -31,7 +29,6 @@ const MODULES = [
   {
     id: "Customer Relations",
     icon: "💬",
-    iconClass: "customer",
     title: "Customer Relations",
     desc: "Craft polished, empathetic responses to customer complaints and support requests.",
     color: "#61b8ff",
@@ -41,7 +38,6 @@ const MODULES = [
   {
     id: "Inventory",
     icon: "📦",
-    iconClass: "inventory",
     title: "Inventory",
     desc: "Generate rich product descriptions that convert browsers into buyers.",
     color: "#10d48e",
@@ -51,7 +47,6 @@ const MODULES = [
   {
     id: "HR & Hiring",
     icon: "👥",
-    iconClass: "hr",
     title: "HR & Hiring",
     desc: "Create detailed, compelling job descriptions to attract the best talent.",
     color: "#f5a623",
@@ -64,10 +59,11 @@ function Dashboard({ businessName, businessType }) {
   const [selectedModule, setSelectedModule] = useState(null);
   const navigate = useNavigate();
 
-  const activeModule = MODULES.find((m) => m.id === selectedModule);
+  const activeModule = MODULES.find((module) => module.id === selectedModule);
 
   const renderContent = () => {
     const props = { businessName, businessType };
+
     switch (selectedModule) {
       case "Marketing":
         return <MarketingForm {...props} />;
@@ -82,7 +78,6 @@ function Dashboard({ businessName, businessType }) {
       default:
         return (
           <>
-            {/* Topbar */}
             <div className="dashboard-topbar">
               <div>
                 <p className="topbar-greeting">Good day 👋</p>
@@ -103,20 +98,22 @@ function Dashboard({ businessName, businessType }) {
               </div>
             </div>
 
-            {/* Module Cards */}
             <div className="module-grid">
-              {MODULES.map((mod) => (
+              {MODULES.map((module) => (
                 <button
-                  key={mod.id}
+                  key={module.id}
                   className="module-card"
-                  onClick={() => setSelectedModule(mod.id)}
-                  style={{ "--card-gradient": mod.gradient }}
+                  onClick={() => setSelectedModule(module.id)}
+                  style={{ "--card-gradient": module.gradient }}
                 >
                   <div
                     className="module-card-icon"
-                    style={{ background: `${mod.color}22`, color: mod.color }}
+                    style={{
+                      background: `${module.color}22`,
+                      color: module.color,
+                    }}
                   >
-                    {mod.icon}
+                    {module.icon}
                   </div>
                   <div
                     style={{
@@ -130,14 +127,14 @@ function Dashboard({ businessName, businessType }) {
                       className="module-card-title"
                       style={{ marginBottom: 0 }}
                     >
-                      {mod.title}
+                      {module.title}
                     </h3>
-                    <span className="badge badge-accent">{mod.tag}</span>
+                    <span className="badge badge-accent">{module.tag}</span>
                   </div>
-                  <p className="module-card-desc">{mod.desc}</p>
+                  <p className="module-card-desc">{module.desc}</p>
                   <span
                     className="module-card-arrow"
-                    style={{ color: mod.color }}
+                    style={{ color: module.color }}
                   >
                     Open module →
                   </span>
@@ -151,7 +148,6 @@ function Dashboard({ businessName, businessType }) {
 
   return (
     <div className="dashboard-root">
-      {/* ── Top Navigation Bar ── */}
       <header className="dashboard-header">
         <div className="header-logo">
           <div className="header-logo-icon">🤖</div>
@@ -176,10 +172,8 @@ function Dashboard({ businessName, businessType }) {
         </div>
       </header>
 
-      {/* ── Main Content ── */}
       <main className="dashboard-main">
         <div className="dashboard-main-content">
-          {/* Breadcrumb when module is selected */}
           {activeModule && (
             <div style={{ marginBottom: 28 }}>
               <div className="dashboard-topbar" style={{ marginBottom: 0 }}>
