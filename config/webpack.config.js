@@ -141,10 +141,10 @@ function createStyleLoaders({
           config: false,
           plugins: useTailwind
             ? [
-                "tailwindcss",
-                "postcss-flexbugs-fixes",
+                require("tailwindcss"),
+                require("postcss-flexbugs-fixes"),
                 [
-                  "postcss-preset-env",
+                  require("postcss-preset-env"),
                   {
                     autoprefixer: {
                       flexbox: "no-2009",
@@ -154,9 +154,9 @@ function createStyleLoaders({
                 ],
               ]
             : [
-                "postcss-flexbugs-fixes",
+                require("postcss-flexbugs-fixes"),
                 [
-                  "postcss-preset-env",
+                  require("postcss-preset-env"),
                   {
                     autoprefixer: {
                       flexbox: "no-2009",
@@ -167,7 +167,7 @@ function createStyleLoaders({
                 // Adds PostCSS Normalize as the reset css with default options,
                 // so that it honors browserslist config in package.json
                 // which in turn let's users customize the target behavior as per their needs.
-                "postcss-normalize",
+                require("postcss-normalize"),
               ],
         },
         sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
@@ -659,11 +659,11 @@ function createWebpackModuleRules({
           test: cssRegex,
           exclude: cssModuleRegex,
           use: createStyleLoaders({
+            isEnvDevelopment,
+            isEnvProduction,
             importLoaders: 1,
             sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
-            modules: {
-              mode: "icss",
-            },
+            modules: false,
           }),
           // Don't consider CSS imports dead code even if the
           // containing package claims to have no side effects.
@@ -676,6 +676,8 @@ function createWebpackModuleRules({
         {
           test: cssModuleRegex,
           use: createStyleLoaders({
+            isEnvDevelopment,
+            isEnvProduction,
             importLoaders: 1,
             sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
             modules: {
@@ -691,11 +693,11 @@ function createWebpackModuleRules({
           test: sassRegex,
           exclude: sassModuleRegex,
           use: createStyleLoaders({
+            isEnvDevelopment,
+            isEnvProduction,
             importLoaders: 3,
             sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
-            modules: {
-              mode: "icss",
-            },
+            modules: false,
             preProcessor: "sass-loader",
           }),
           // Don't consider CSS imports dead code even if the
@@ -709,6 +711,8 @@ function createWebpackModuleRules({
         {
           test: sassModuleRegex,
           use: createStyleLoaders({
+            isEnvDevelopment,
+            isEnvProduction,
             importLoaders: 3,
             sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
             modules: {
