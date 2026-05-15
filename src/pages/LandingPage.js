@@ -37,7 +37,7 @@ function LandingPage({ setBusinessName, setBusinessType }) {
         <div style={{ marginBottom: 4 }}>
           <span className="landing-badge">
             <span className="landing-badge-dot" />
-            Powered by GPT-4 & DALL·E 3
+            <span>Powered by GPT-4 & DALL·E 3</span>
           </span>
         </div>
 
@@ -99,12 +99,12 @@ function LandingPage({ setBusinessName, setBusinessType }) {
               {isSubmitting ? (
                 <>
                   <span className="spinner" />
-                  Setting up your workspace...
+                  <span>Setting up your workspace...</span>
                 </>
               ) : (
                 <>
-                  Launch Dashboard
-                  <span style={{ marginLeft: 2 }}>→</span>
+                  <span>Launch Dashboard</span>
+                  <span>→</span>
                 </>
               )}
             </button>

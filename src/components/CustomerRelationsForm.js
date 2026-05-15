@@ -23,7 +23,8 @@ const CustomerRelationsForm = ({ businessName }) => {
     setLoading(true);
     setOutput("");
     setError("");
-    const prompt = `Draft a ${data.tone} response${businessName ? ` from ${businessName}` : ""} to a customer complaint about: ${data.issue}. Keep it professional, empathetic, and solution-focused.`;
+    const businessInfo = businessName ? ` from ${businessName}` : "";
+    const prompt = `Draft a ${data.tone} response${businessInfo} to a customer complaint about: ${data.issue}. Keep it professional, empathetic, and solution-focused.`;
     try {
       const result = await sendPrompt(prompt);
       setOutput(result);

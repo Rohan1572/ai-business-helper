@@ -20,7 +20,12 @@ const HRHiringForm = ({ businessName, businessType }) => {
     setLoading(true);
     setOutput("");
     setError("");
-    const prompt = `Write a professional, engaging job description for a ${data.position} position${businessName ? ` at ${businessName}` : ""}${businessType ? ` (a ${businessType})` : ""}. Required qualities: ${data.qualities}.${data.experience ? ` Required experience: ${data.experience}.` : ""} Include: role overview, key responsibilities, required qualifications, preferred skills, and application instructions. Make it sound like a great place to work.`;
+    const businessNameInfo = businessName ? ` at ${businessName}` : "";
+    const businessTypeInfo = businessType ? ` (a ${businessType})` : "";
+    const experienceInfo = data.experience
+      ? ` Required experience: ${data.experience}.`
+      : "";
+    const prompt = `Write a professional, engaging job description for a ${data.position} position${businessNameInfo}${businessTypeInfo}. Required qualities: ${data.qualities}.${experienceInfo} Include: role overview, key responsibilities, required qualifications, preferred skills, and application instructions. Make it sound like a great place to work.`;
     try {
       const result = await sendPrompt(prompt);
       setOutput(result);

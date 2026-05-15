@@ -16,7 +16,8 @@ const LegalForm = ({ businessName }) => {
     setLoading(true);
     setOutput("");
     setError("");
-    const prompt = `Draft a basic ${data.type} agreement ${businessName ? `for ${businessName}, ` : ""}between ${data.parties}. Include responsibilities, key terms, and any legal considerations. Format it clearly with sections.`;
+    const businessClause = businessName ? `for ${businessName}, ` : "";
+    const prompt = `Draft a basic ${data.type} agreement ${businessClause}between ${data.parties}. Include responsibilities, key terms, and any legal considerations. Format it clearly with sections.`;
     try {
       const result = await sendPrompt(prompt);
       setOutput(result);

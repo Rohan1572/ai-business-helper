@@ -16,7 +16,9 @@ const InventoryForm = ({ businessName, businessType }) => {
     setLoading(true);
     setOutput("");
     setError("");
-    const prompt = `Create a compelling, concise product description for ${data.item}${businessName ? ` sold by ${businessName}` : ""}${businessType ? ` (a ${businessType})` : ""}. Specifications: ${data.details}. Emphasize key features, benefits, and ideal use cases. Make it engaging for online shoppers.`;
+    const sellerInfo = businessName ? ` sold by ${businessName}` : "";
+    const businessTypeInfo = businessType ? ` (a ${businessType})` : "";
+    const prompt = `Create a compelling, concise product description for ${data.item}${sellerInfo}${businessTypeInfo}. Specifications: ${data.details}. Emphasize key features, benefits, and ideal use cases. Make it engaging for online shoppers.`;
     try {
       const result = await sendPrompt(prompt);
       setOutput(result);
