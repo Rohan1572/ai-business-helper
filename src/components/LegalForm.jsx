@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { sendPrompt } from "../api/openai";
 import OutputBox from "./OutputBox";
 
-const InventoryForm = ({ businessName, businessType }) => {
-  const [data, setData] = useState({ item: "", details: "" });
+const LegalForm = ({ businessName }) => {
+  const [data, setData] = useState({ type: "", parties: "" });
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -16,49 +16,47 @@ const InventoryForm = ({ businessName, businessType }) => {
     setLoading(true);
     setOutput("");
     setError("");
-    const sellerInfo = businessName ? ` sold by ${businessName}` : "";
-    const businessTypeInfo = businessType ? ` (a ${businessType})` : "";
-    const prompt = `Create a compelling, concise product description for ${data.item}${sellerInfo}${businessTypeInfo}. Specifications: ${data.details}. Emphasize key features, benefits, and ideal use cases. Make it engaging for online shoppers.`;
+    const businessClause = businessName ? `for ${businessName}, ` : "";
+    const prompt = `Draft a basic ${data.type} agreement ${businessClause}between ${data.parties}. Include responsibilities, key terms, and any legal considerations. Format it clearly with sections.`;
     try {
       const result = await sendPrompt(prompt);
       setOutput(result);
     } catch {
-      setError("Failed to generate description. Please try again.");
+      setError("Failed to generate legal document. Please try again.");
     }
     setLoading(false);
   };
 
-  const isValid = data.item.trim() && data.details.trim();
+  const isValid = data.type && data.parties;
 
   return (
     <div className="form-panel">
       <div className="form-card">
         <div className="form-field">
-          <label className="field-label" htmlFor="inv-item">
-            Item / Product Name
+          <label className="field-label" htmlFor="legal-type">
+            Type of Agreement
           </label>
           <input
-            id="inv-item"
-            name="item"
+            id="legal-type"
+            name="type"
             className="field-input"
-            value={data.item}
+            value={data.type}
             onChange={handleChange}
-            placeholder="e.g. Wireless Noise-Cancelling Earbuds"
+            placeholder="e.g. NDA, Lease Agreement, Service Contract"
           />
         </div>
 
         <div className="form-field" style={{ marginBottom: 0 }}>
-          <label className="field-label" htmlFor="inv-details">
-            Specifications & Features
+          <label className="field-label" htmlFor="legal-parties">
+            Parties Involved
           </label>
           <textarea
-            id="inv-details"
-            name="details"
+            id="legal-parties"
+            name="parties"
             className="field-textarea"
-            value={data.details}
+            value={data.parties}
             onChange={handleChange}
-            placeholder="e.g. Bluetooth 5.2, 40-hour battery, ANC, USB-C charging, IPX5 water resistant"
-            style={{ minHeight: 110 }}
+            placeholder="e.g. Company A and Freelancer B, including their roles and responsibilities"
           />
         </div>
       </div>
@@ -71,10 +69,10 @@ const InventoryForm = ({ businessName, businessType }) => {
         >
           {loading ? (
             <>
-              <span className="spinner" /> Generating…
+              <span className="spinner" /> Drafting…
             </>
           ) : (
-            "✦ Generate Description"
+            "✦ Generate Document"
           )}
         </button>
       </div>
@@ -85,9 +83,9 @@ const InventoryForm = ({ businessName, businessType }) => {
         </p>
       )}
 
-      <OutputBox content={output} title="Product Description" />
+      <OutputBox content={output} title="Legal Document" />
     </div>
   );
 };
 
-export default InventoryForm;
+export default LegalForm;

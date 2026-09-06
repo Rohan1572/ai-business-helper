@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { sendPrompt } from "../api/openai";
 import OutputBox from "./OutputBox";
 

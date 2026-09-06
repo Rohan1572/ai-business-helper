@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { sendPrompt, generateImage } from "../api/openai";
 import OutputBox from "./OutputBox";
 
-const MarketingForm = ({ businessName, businessType }) => {
+const MarketingForm = ({ businessName }) => {
   const [data, setData] = useState({
     business: businessName || "",
     offer: "",

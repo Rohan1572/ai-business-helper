@@ -1,14 +1,14 @@
 import axios from "axios";
 
-if (!process.env.REACT_APP_OPENAI_API_KEY) {
-  console.warn("Missing REACT_APP_OPENAI_API_KEY in .env");
+if (!import.meta.env.VITE_OPENAI_API_KEY) {
+  console.warn("Missing VITE_OPENAI_API_KEY in .env");
 }
 
 const openai = axios.create({
   baseURL: "https://api.openai.com/v1",
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+    Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
   },
 });
 
@@ -23,7 +23,9 @@ export const sendPrompt = async (userPrompt) => {
     return data.choices?.[0]?.message?.content || "";
   } catch (err) {
     console.error("OpenAI API error:", err.response?.data || err.message);
-    throw new Error("There was a problem fetching your AI response.");
+    throw new Error("There was a problem fetching your AI response.", {
+      cause: err,
+    });
   }
 };
 
@@ -38,6 +40,8 @@ export const generateImage = async (imagePrompt) => {
     return data.data?.[0]?.url || "";
   } catch (err) {
     console.error("OpenAI Image API error:", err.response?.data || err.message);
-    throw new Error("There was a problem generating the image.");
+    throw new Error("There was a problem generating the image.", {
+      cause: err,
+    });
   }
 };

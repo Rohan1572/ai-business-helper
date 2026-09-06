@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function OutputBox({ content, title = "AI Response" }) {
   const [copied, setCopied] = useState(false);
