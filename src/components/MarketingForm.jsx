@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { sendPrompt, generateImage } from "../api/openai";
 import OutputBox from "./OutputBox";
 
@@ -12,10 +12,6 @@ const MarketingForm = ({ businessName }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (businessName) setData((d) => ({ ...d, business: businessName }));
-  }, [businessName]);
 
   const handleChange = (e) =>
     setData({ ...data, [e.target.name]: e.target.value });
@@ -39,7 +35,7 @@ const MarketingForm = ({ businessName }) => {
       setImageUrl(imageResult);
     } catch {
       setError(
-        "Failed to generate content. Please check your API key and try again."
+        "Failed to generate content. Please check your API key and try again.",
       );
     }
     setLoading(false);
